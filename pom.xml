@@ -11,7 +11,7 @@
 
 	<groupId>com.mypetclinic</groupId>
 	<artifactId>clinicdemo</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>clinicdemo</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -50,7 +50,7 @@
 
     <scm>
     	<developerConnection>scm:git:git@github.com:neoradu/my-pet-clinic.git</developerConnection>
-      <tag>clinicdemo-0.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
