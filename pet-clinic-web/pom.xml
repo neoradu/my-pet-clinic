@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <artifactId>pet-clinic-data</artifactId>
-            <groupId>guru.springframework</groupId>
+            <groupId>com.mypetclinic</groupId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
