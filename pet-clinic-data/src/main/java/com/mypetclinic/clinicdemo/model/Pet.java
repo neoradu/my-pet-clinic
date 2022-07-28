@@ -1,7 +1,6 @@
 package com.mypetclinic.clinicdemo.model;
 
 import java.time.LocalDate;
-import com.mypetclinic.clinicdemo.model.PetType;
 
 public class Pet {
 	private PetType petType;
