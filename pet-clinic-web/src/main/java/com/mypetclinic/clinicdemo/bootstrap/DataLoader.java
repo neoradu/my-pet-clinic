@@ -1,5 +1,6 @@
 package com.mypetclinic.clinicdemo.bootstrap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -7,8 +8,6 @@ import com.mypetclinic.clinicdemo.model.Owner;
 import com.mypetclinic.clinicdemo.model.Vet;
 import com.mypetclinic.clinicdemo.services.OwnerService;
 import com.mypetclinic.clinicdemo.services.VetService;
-import com.mypetclinic.clinicdemo.services.map.OwnerServiceMap;
-import com.mypetclinic.clinicdemo.services.map.VetServiceMap;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -16,10 +15,10 @@ public class DataLoader implements CommandLineRunner {
 	final VetService vetService;
 	final OwnerService ownerService;
 	
-	DataLoader() {
-		//For now init this here. Later will be using Spring Boot provided Beans
-		this.ownerService = new OwnerServiceMap();
-		this.vetService = new VetServiceMap();
+	@Autowired//Not needed but put here because this is a learning project
+	public DataLoader(VetService vetService, OwnerService ownerService) {
+		this.vetService = vetService;
+		this.ownerService = ownerService;
 	}
 	
 	private String printAllData() {
