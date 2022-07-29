@@ -16,7 +16,14 @@
             <groupId>com.mypetclinic</groupId>
             <version>0.0.2-SNAPSHOT</version>
         </dependency>
-
+        <!--Spring Boot Starters:
+            -Top leve dependencies for popular JAVA libraries
+            -Will bring in dependencies for the project and related
+             Spring components
+             Eg: spring-boot-starter-data-jpa brings in:
+                -Hibernate
+                -Spring Data JPA an relaeted Spring deps
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

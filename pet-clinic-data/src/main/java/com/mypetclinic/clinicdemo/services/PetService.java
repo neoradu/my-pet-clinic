@@ -1,6 +1,5 @@
 package com.mypetclinic.clinicdemo.services;
 
-import java.util.Set;
 import com.mypetclinic.clinicdemo.model.Pet;
 
 /**
