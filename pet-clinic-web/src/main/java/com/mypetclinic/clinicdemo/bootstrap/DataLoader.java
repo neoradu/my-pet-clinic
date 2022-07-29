@@ -41,13 +41,11 @@ public class DataLoader implements CommandLineRunner {
 		final String[] personNames = {"Vali", "Georgel", "Ionel", "Bogdan", "Radu", "Alex", "Cosmin"};
 		for(int i = 0; i < personNames.length; i++) {
 			Owner o = new Owner();
-			o.setId((long) i);
 			o.setFirstName(personNames[i]);
 			o.setLastName(personNames[personNames.length - i -1]);
 			ownerService.save(o);
 			
 			Vet v = new Vet();
-			v.setId((long) i);
 			v.setFirstName("Dr-" + personNames[i]);
 			v.setLastName(personNames[personNames.length - i -1]);
 			vetService.save(v);	
