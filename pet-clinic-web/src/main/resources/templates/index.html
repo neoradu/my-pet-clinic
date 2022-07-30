@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<!--Thymeleaf namespace.This will give thymeleaf th extension-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- xmlns:th="http://www.thymeleaf.org" Thymeleaf namespace.This will give thymeleaf th extension-->
+<!-- th:replace="  this tells tymeleaf to get stuff from templates/fragments/layout-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
     <head>
         <meta charset="UTF-8"/>
         <title>My pet clinic main page</title>
     </head>
     <body>
-        <h1 th:text="'Index Page'"> empty </h1>
+        <h2 th:text="#{welcome}">Welcome</h2>
+
+        <div class="row">
+            <div class="col-md-12">
+                <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
+            </div>
+        </div>
     </body>
 </html>
