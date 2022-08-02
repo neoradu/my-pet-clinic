@@ -15,12 +15,18 @@
                 <th style="width: 150px;">Id</th>
                 <th style="width: 150px;">First Name</th>
                 <th style="width: 150px;">Last Name</th>
+                <th style="width: 150px;">Address</th>
+                <th style="width: 150px;">City</th>
+                <th style="width: 150px;">Telephone</th>
             </thead>
             <tbody>
                 <tr th:each="owner : ${owners}">
                     <td th:text="${owner.id}"> empty</td>
                     <td th:text="${owner.firstName}">empty</td>
                     <td th:text="${owner.lastName}">empty</td>
+                    <td th:text="${owner.address}"> empty</td>
+                    <td th:text="${owner.city}">empty</td>
+                    <td th:text="${owner.telephone}">empty</td>
                 </tr>
             </tbody>
         </table>
