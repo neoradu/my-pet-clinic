@@ -1,10 +1,13 @@
 package com.mypetclinic.clinicdemo.bootstrap;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.mypetclinic.clinicdemo.model.Owner;
+import com.mypetclinic.clinicdemo.model.Pet;
 import com.mypetclinic.clinicdemo.model.PetType;
 import com.mypetclinic.clinicdemo.model.Vet;
 import com.mypetclinic.clinicdemo.services.OwnerService;
@@ -57,6 +60,14 @@ public class DataLoader implements CommandLineRunner {
 			Owner o = new Owner();
 			o.setFirstName(personNames[i]);
 			o.setLastName(personNames[personNames.length - i -1]);
+			o.setAddress("adress-" + i);
+			o.setCity("Chiatra");
+			o.setTelephone("213208");
+			Pet pet = new Pet();
+			pet.setPetType(cat);
+			pet.setName("miau-" + 1);
+			pet.setBirthDate(LocalDate.now());
+			o.getPets().add(pet);
 			ownerService.save(o);
 			
 			Vet v = new Vet();
@@ -64,7 +75,7 @@ public class DataLoader implements CommandLineRunner {
 			v.setLastName(personNames[personNames.length - i -1]);
 			vetService.save(v);	
 		}
-		System.out.print(printAllData());
+		//System.out.print(printAllData());
 		System.out.println("Boostraping data...END");
 		
 	}
