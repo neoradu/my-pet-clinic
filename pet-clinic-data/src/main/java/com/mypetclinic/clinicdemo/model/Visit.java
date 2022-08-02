@@ -1,0 +1,31 @@
+package com.mypetclinic.clinicdemo.model;
+
+import java.time.LocalDate;
+
+public class Visit extends BaseEntity {
+	
+	private LocalDate date;
+	private String description;
+	private Pet pet;
+	
+	public LocalDate getDate() {
+		return date;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public Pet getPet() {
+		return pet;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+	
+
+}
