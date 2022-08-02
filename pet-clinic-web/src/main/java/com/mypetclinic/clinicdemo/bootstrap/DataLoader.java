@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.mypetclinic.clinicdemo.model.Owner;
 import com.mypetclinic.clinicdemo.model.Pet;
 import com.mypetclinic.clinicdemo.model.PetType;
+import com.mypetclinic.clinicdemo.model.Speciality;
 import com.mypetclinic.clinicdemo.model.Vet;
 import com.mypetclinic.clinicdemo.services.OwnerService;
 import com.mypetclinic.clinicdemo.services.PetTypeService;
@@ -43,8 +44,7 @@ public class DataLoader implements CommandLineRunner {
 		}
 		return sb.toString();	
 	}
-	@Override
-	public void run(String... args) throws Exception {
+	private void loadData() {
 		System.out.println("Boostraping data...");
 		PetType cat = new PetType();
 		cat.setName("Cat");
@@ -55,6 +55,7 @@ public class DataLoader implements CommandLineRunner {
 		
 		
 		final String[] personNames = {"Vali", "Georgel", "Ionel", "Bogdan", "Radu", "Alex", "Cosmin"};
+		final String[] specialityes = {"dentist", "taie lemne", "bate cuie"};
 		
 		for(int i = 0; i < personNames.length; i++) {
 			Owner o = new Owner();
@@ -73,11 +74,19 @@ public class DataLoader implements CommandLineRunner {
 			Vet v = new Vet();
 			v.setFirstName("Dr-" + personNames[i]);
 			v.setLastName(personNames[personNames.length - i -1]);
+			Speciality speciality = new Speciality();
+			speciality.setDesciption(specialityes[i % specialityes.length]);
+			v.getSpecialities().add(speciality);
 			vetService.save(v);	
 		}
 		//System.out.print(printAllData());
-		System.out.println("Boostraping data...END");
-		
+		System.out.println("Boostraping data...END");	
+	}
+	@Override
+	public void run(String... args) throws Exception {
+		if(petTypeService.findAll().size() == 0)
+			loadData();
+				
 	}
 
 }
