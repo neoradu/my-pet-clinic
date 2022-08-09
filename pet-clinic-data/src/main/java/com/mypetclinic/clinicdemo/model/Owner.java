@@ -3,11 +3,28 @@ package com.mypetclinic.clinicdemo.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity //JPA entity
+@Table(name = "owners")//tels JPA to name this table as "owners" in the database
 public class Owner extends Person {
 	
+	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "telephone")
 	private String telephone;
+	//Sets a relation oneToMany
+	//CascadeType.ALL --> any operation on the parent class(Owner) will cascade  down to the children(Pet)
+	//Eg: if we delete an owner the Pet will also get deleted
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets = new HashSet<>();
 	
 	public String getAddress() {
@@ -34,6 +51,4 @@ public class Owner extends Person {
 	public void setPets(Set<Pet> pets) {
 		this.pets = pets;
 	}
-
-	
 }
