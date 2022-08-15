@@ -13,6 +13,7 @@ import com.mypetclinic.clinicdemo.model.Speciality;
 import com.mypetclinic.clinicdemo.model.Vet;
 import com.mypetclinic.clinicdemo.services.OwnerService;
 import com.mypetclinic.clinicdemo.services.PetTypeService;
+import com.mypetclinic.clinicdemo.services.SpecialityService;
 import com.mypetclinic.clinicdemo.services.VetService;
 
 @Component
@@ -21,13 +22,15 @@ public class DataLoader implements CommandLineRunner {
 	final VetService vetService;
 	final OwnerService ownerService;
 	final PetTypeService petTypeService;
+	final SpecialityService specialityService;
 	
 	@Autowired//Not needed but put here because this is a learning project
 	public DataLoader(VetService vetService, OwnerService ownerService,
-			          PetTypeService petTypeService) {
+			          PetTypeService petTypeService, SpecialityService specialityService) {
 		this.petTypeService = petTypeService;
 		this.vetService = vetService;
 		this.ownerService = ownerService;
+		this.specialityService = specialityService;
 	}
 	
 	private String printAllData() {
@@ -49,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
 		PetType cat = new PetType();
 		cat.setName("Cat");
 		PetType dog = new PetType();
-		cat.setName("Dog");
+		dog.setName("Dog");
 		petTypeService.save(cat);
 		petTypeService.save(dog);
 		
@@ -66,8 +69,9 @@ public class DataLoader implements CommandLineRunner {
 			o.setTelephone("213208");
 			Pet pet = new Pet();
 			pet.setPetType(cat);
-			pet.setName("miau-" + 1);
+			pet.setName("miau-" + i);
 			pet.setBirthDate(LocalDate.now());
+			pet.setOwner(o);
 			o.getPets().add(pet);
 			ownerService.save(o);
 			
@@ -76,6 +80,8 @@ public class DataLoader implements CommandLineRunner {
 			v.setLastName(personNames[personNames.length - i -1]);
 			Speciality speciality = new Speciality();
 			speciality.setDesciption(specialityes[i % specialityes.length]);
+			
+			specialityService.save(speciality);
 			v.getSpecialities().add(speciality);
 			vetService.save(v);	
 		}
