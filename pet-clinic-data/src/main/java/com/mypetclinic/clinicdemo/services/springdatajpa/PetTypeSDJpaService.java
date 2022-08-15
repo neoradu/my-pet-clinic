@@ -14,38 +14,38 @@ import com.mypetclinic.clinicdemo.services.PetTypeService;
 @Service
 @Profile("springdatajpa")
 public class PetTypeSDJpaService implements PetTypeService{
-	final private PetTypeRepository vetRepository;
+	final private PetTypeRepository petTypeRepository;
 	
-	public PetTypeSDJpaService(PetTypeRepository vetRepository) {
+	public PetTypeSDJpaService(PetTypeRepository petTypeRepository) {
 		super();
-		this.vetRepository = vetRepository;
+		this.petTypeRepository = petTypeRepository;
 	}
 
 	@Override
 	public PetType findById(Long id) {
-		return vetRepository.findById(id).orElse(null);
+		return petTypeRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public PetType save(PetType object) {
-		return vetRepository.save(object);
+		return petTypeRepository.save(object);
 	}
 
 	@Override
 	public Set<PetType> findAll() {
 		Set<PetType> result = new HashSet<PetType>();
-		vetRepository.findAll().forEach(result::add);
+		petTypeRepository.findAll().forEach(result::add);
 		return result;
 	}
 
 	@Override
 	public void delete(PetType object) {
-		vetRepository.delete(object);
+		petTypeRepository.delete(object);
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		vetRepository.deleteById(id);
+		petTypeRepository.deleteById(id);
 	}
 
 }
