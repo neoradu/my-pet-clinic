@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.mypetclinic.clinicdemo.model.Vet;
 
 
-public interface VetRepositoy extends CrudRepository<Vet, Long> {
+public interface VetRepository extends CrudRepository<Vet, Long> {
 
 }
