@@ -16,6 +16,13 @@ public class BaseEntity implements Serializable {
 	//IDENTITY -> Indicates that the persistence provider must assign primary keys
 	//for the entity using a database identity column
 	private Long id;
+	
+	BaseEntity() {}
+	
+	public BaseEntity(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;

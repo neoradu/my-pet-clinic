@@ -8,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import lombok.Builder;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -19,6 +22,14 @@ public class Vet extends Person {
 	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name = "vet_id"),
 	inverseJoinColumns = @JoinColumn(name = "speciality_id"))
 	private Set<Speciality> specialities  = new HashSet<>();;
+
+	public Vet() {}
+	
+	@Builder //using Lombok to generate builder pattern https://projectlombok.org/features/Builder
+	public Vet(Long id, String firstName, String lastName, Set<Speciality> specialities) {
+		super(id, firstName, lastName);
+		this.specialities = (specialities != null) ? specialities : new HashSet<>();;
+	}
 
 	public Set<Speciality> getSpecialities() {
 		return specialities;

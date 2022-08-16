@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
+
 @Entity //JPA entity
 @Table(name = "owners")//tels JPA to name this table as "owners" in the database
 public class Owner extends Person {
@@ -26,6 +28,19 @@ public class Owner extends Person {
 	//Eg: if we delete an owner the Pet will also get deleted
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets = new HashSet<>();
+	
+	
+	public Owner() { }
+
+	@Builder //using Lombok to generate builder pattern https://projectlombok.org/features/Builder
+	public Owner(Long id, String firstName, String lastName, String address,
+			     String city, String telephone, Set<Pet> pets) {
+		super(id, firstName, lastName);
+		this.address = address;
+		this.city = city;
+		this.telephone = telephone;
+		this.pets =  (pets != null) ? pets : new HashSet<>();
+	}
 	
 	public String getAddress() {
 		return address;

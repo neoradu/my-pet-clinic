@@ -1,6 +1,7 @@
 package com.mypetclinic.clinicdemo.bootstrap;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -49,10 +50,13 @@ public class DataLoader implements CommandLineRunner {
 	}
 	private void loadData() {
 		System.out.println("Boostraping data...");
-		PetType cat = new PetType();
-		cat.setName("Cat");
-		PetType dog = new PetType();
-		dog.setName("Dog");
+		PetType cat = PetType.builder()
+				             .name("Cat")
+				             .build();
+
+		PetType dog = PetType.builder()
+	                         .name("Dog")
+	                         .build();
 		petTypeService.save(cat);
 		petTypeService.save(dog);
 		
@@ -61,12 +65,13 @@ public class DataLoader implements CommandLineRunner {
 		final String[] specialityes = {"dentist", "taie lemne", "bate cuie"};
 		
 		for(int i = 0; i < personNames.length; i++) {
-			Owner o = new Owner();
-			o.setFirstName(personNames[i]);
-			o.setLastName(personNames[personNames.length - i -1]);
-			o.setAddress("adress-" + i);
-			o.setCity("Chiatra");
-			o.setTelephone("213208");
+			Owner o = Owner.builder()//using builder pattern, not sure is so much nicer
+						   .firstName(personNames[i])
+					       .lastName(personNames[personNames.length - i -1])
+					       .address("adress-" + i)
+					       .city("Chiatra")
+					       .telephone("213208")
+					       .build();
 			Pet pet = new Pet();
 			pet.setPetType(cat);
 			pet.setName("miau-" + i);
