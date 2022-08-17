@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class ClinicdemoApplicationTests {
 
 	@BeforeAll//Executed before all tests
-	public void generalInit() {
+	public static void generalInit() {
 		
 	}
 	
@@ -32,10 +32,8 @@ public class ClinicdemoApplicationTests {
     public void contextLoads() {
     }
     
-
-    
     @AfterAll//Executed after all tests
-    public void generalCleanUp() {
+    public static void generalCleanUp() {
     	
     }
 
