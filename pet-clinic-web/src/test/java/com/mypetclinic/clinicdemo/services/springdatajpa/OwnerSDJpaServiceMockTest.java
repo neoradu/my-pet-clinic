@@ -15,7 +15,6 @@ import com.mypetclinic.clinicdemo.model.Owner;
 import com.mypetclinic.clinicdemo.model.repositories.OwnerRepository;
 import com.mypetclinic.clinicdemo.model.repositories.PetRepository;
 import com.mypetclinic.clinicdemo.model.repositories.PetTypeRepository;
-import com.mypetclinic.clinicdemo.services.OwnerService;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
