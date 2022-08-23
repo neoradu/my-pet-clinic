@@ -11,4 +11,10 @@ import com.mypetclinic.clinicdemo.services.PetTypeService;
 public class PetTypeServiceMap extends AbstractMapService<PetType, Long> 
                            implements PetTypeService {
 
+	@Override
+	public PetType findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Builder;
 import lombok.ToString;
 
@@ -31,6 +33,7 @@ public class Pet extends BaseEntity {
 	@JoinColumn(name = "owner_id")//this tells JPA how to do the mapping at databse level --> we will have a owner_id property in the Pet record
 	private Owner owner;// --> this is refers by the mappedBy = "owner"
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
 	
