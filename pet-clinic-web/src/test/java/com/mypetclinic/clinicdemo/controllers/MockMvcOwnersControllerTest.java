@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
-
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.isNotNull;
 
 import static org.mockito.Mockito.when;
 
@@ -53,8 +53,9 @@ public class MockMvcOwnersControllerTest {
 				                 .build();
 			
 	}
+	
 	@Test
-	public void testControllerIndex() throws Exception {
+	public void testIndex() throws Exception {
 		when(ownerService.findAll()).thenReturn(owners);
 		mockMvc.perform(get("/owners"))
 		       .andExpect(status().isOk())
@@ -62,10 +63,26 @@ public class MockMvcOwnersControllerTest {
 		       .andExpect(model().attributeExists("owners"));
 	}
 	@Test
-	public void testControllerFind() throws Exception {
+	public void testFind() throws Exception {
 
 		mockMvc.perform(get("/owners/find"))
 		       .andExpect(status().isOk())
 		       .andExpect(view().name("notImplemented"));
+	}
+	
+	@Test
+	public void testDisplayOwner() throws Exception {
+		Owner retOwner = Owner.builder()
+							  .id(1L)
+							  .firstName("TestFirstName")
+							  .lastName("last name")
+							  .build();
+		
+		when(ownerService.findById(anyLong())).thenReturn(retOwner);
+		
+		mockMvc.perform(get("/owners/1"))
+		       .andExpect(status().isOk())
+		       .andExpect(view().name("owners/ownerDetails"))
+		       .andExpect(model().attributeExists("owner"));
 	}	
 }
