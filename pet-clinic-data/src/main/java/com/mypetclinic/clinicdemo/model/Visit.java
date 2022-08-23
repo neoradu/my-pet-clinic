@@ -10,7 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {

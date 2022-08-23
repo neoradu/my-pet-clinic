@@ -10,7 +10,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 @Entity //JPA entity
 @Table(name = "owners")//tels JPA to name this table as "owners" in the database
 public class Owner extends Person {
@@ -66,4 +68,5 @@ public class Owner extends Person {
 	public void setPets(Set<Pet> pets) {
 		this.pets = pets;
 	}
+	
 }

@@ -3,6 +3,9 @@ package com.mypetclinic.clinicdemo.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import lombok.ToString;
+
+@ToString
 @MappedSuperclass//tells JPA that this is a class that will be inherited from.--> no database tables will be created for this
 public class Person extends BaseEntity {
 	@Column(name = "first_name")// tells JPA how to name the database column

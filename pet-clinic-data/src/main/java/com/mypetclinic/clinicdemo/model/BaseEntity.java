@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.ToString;
+
+@ToString
 @MappedSuperclass 
 //Tells JPA that this is a class that other classes will inherit from
 //--> tells not to create a special table for this class in the database
@@ -31,5 +34,6 @@ public class BaseEntity implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	
 }

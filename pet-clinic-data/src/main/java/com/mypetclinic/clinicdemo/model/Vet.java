@@ -10,9 +10,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
 import javax.persistence.JoinColumn;
 
+@ToString
 @Entity
 @Table(name = "vets")
 public class Vet extends Person {

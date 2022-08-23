@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 @Entity//tells JPA that this will be an entity persisted to the database
 @Table(name = "specialities")
 public class Speciality extends BaseEntity {

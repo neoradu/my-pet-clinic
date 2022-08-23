@@ -12,10 +12,12 @@ import com.mypetclinic.clinicdemo.model.Pet;
 import com.mypetclinic.clinicdemo.model.PetType;
 import com.mypetclinic.clinicdemo.model.Speciality;
 import com.mypetclinic.clinicdemo.model.Vet;
+import com.mypetclinic.clinicdemo.model.Visit;
 import com.mypetclinic.clinicdemo.services.OwnerService;
 import com.mypetclinic.clinicdemo.services.PetTypeService;
 import com.mypetclinic.clinicdemo.services.SpecialityService;
 import com.mypetclinic.clinicdemo.services.VetService;
+import com.mypetclinic.clinicdemo.services.VisitService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -24,14 +26,17 @@ public class DataLoader implements CommandLineRunner {
 	final OwnerService ownerService;
 	final PetTypeService petTypeService;
 	final SpecialityService specialityService;
+	final VisitService visitService;
 	
 	@Autowired//Not needed but put here because this is a learning project
 	public DataLoader(VetService vetService, OwnerService ownerService,
-			          PetTypeService petTypeService, SpecialityService specialityService) {
+			          PetTypeService petTypeService, SpecialityService specialityService,
+			          VisitService visitService) {
 		this.petTypeService = petTypeService;
 		this.vetService = vetService;
 		this.ownerService = ownerService;
 		this.specialityService = specialityService;
+		this.visitService = visitService;
 	}
 	
 	private String printAllData() {
@@ -61,7 +66,7 @@ public class DataLoader implements CommandLineRunner {
 		petTypeService.save(dog);
 		
 		
-		final String[] personNames = {"Vali", "Georgel", "Ionel", "Bogdan", "Radu", "Alex", "Cosmin"};
+		final String[] personNames = {"Vali", "Georgel", "Ionel", "Bogdan", "Radu", "Alex", "Vasile"};
 		final String[] specialityes = {"dentist", "taie lemne", "bate cuie"};
 		
 		for(int i = 0; i < personNames.length; i++) {
@@ -89,6 +94,13 @@ public class DataLoader implements CommandLineRunner {
 			specialityService.save(speciality);
 			v.getSpecialities().add(speciality);
 			vetService.save(v);	
+			
+			Visit visit = Visit.builder()
+					             .date(LocalDate.now())
+					   			 .description("durere la banana")
+					             .pet(pet)
+					             .build();
+			visitService.save(visit);
 		}
 		//System.out.print(printAllData());
 		System.out.println("Boostraping data...END");	

@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {

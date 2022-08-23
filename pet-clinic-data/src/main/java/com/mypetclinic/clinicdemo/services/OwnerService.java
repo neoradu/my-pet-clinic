@@ -1,5 +1,8 @@
 package com.mypetclinic.clinicdemo.services;
 
+
+import java.util.Set;
+
 import com.mypetclinic.clinicdemo.model.Owner;
 
 /**
@@ -9,5 +12,7 @@ import com.mypetclinic.clinicdemo.model.Owner;
 public interface OwnerService extends CrudService<Owner, Long> {
 
 	Owner findByLastName(String lastName);
+	
+	Set<Owner> findAllByLastName(String lastName);
 
 }

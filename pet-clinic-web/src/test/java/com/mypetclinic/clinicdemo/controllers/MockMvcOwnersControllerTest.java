@@ -14,6 +14,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.mypetclinic.clinicdemo.model.Owner;
 import com.mypetclinic.clinicdemo.services.OwnerService;
+
+import lombok.ToString;
+
 //In Java, static import concept is introduced in 1.5 version. With the help of static import,
 //we can access the static members of a class directly without class name or any object
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.isNotNull;
 
 import static org.mockito.Mockito.when;
@@ -54,21 +58,14 @@ public class MockMvcOwnersControllerTest {
 			
 	}
 	
-	@Test
+	/*@Test
 	public void testIndex() throws Exception {
 		when(ownerService.findAll()).thenReturn(owners);
 		mockMvc.perform(get("/owners"))
 		       .andExpect(status().isOk())
 		       .andExpect(view().name("owners/index"))
 		       .andExpect(model().attributeExists("owners"));
-	}
-	@Test
-	public void testFind() throws Exception {
-
-		mockMvc.perform(get("/owners/find"))
-		       .andExpect(status().isOk())
-		       .andExpect(view().name("notImplemented"));
-	}
+	}*/
 	
 	@Test
 	public void testDisplayOwner() throws Exception {
@@ -84,5 +81,55 @@ public class MockMvcOwnersControllerTest {
 		       .andExpect(status().isOk())
 		       .andExpect(view().name("owners/ownerDetails"))
 		       .andExpect(model().attributeExists("owner"));
-	}	
+	}
+	
+	@Test
+	public void testFindOwner() throws Exception {
+		mockMvc.perform(get("/owners/find"))
+	       .andExpect(status().isOk())
+	       .andExpect(view().name("owners/findOwners"))
+	       .andExpect(model().attributeExists("owner"));	
+	}
+	
+	@Test
+	public void testDisplayOwners0() throws Exception {
+		Set<Owner> zeroOwner = new HashSet<>();
+		
+		when(ownerService.findAllByLastName(anyString())).thenReturn(zeroOwner);
+		
+		mockMvc.perform(get("/owners"))
+	       .andExpect(status().isOk())
+	       .andExpect(view().name("owners/findOwners"));
+		
+	}
+	
+	@Test
+	public void testDisplayOwners1() throws Exception {
+		long id = 1;
+		Set<Owner> oneOwner = new HashSet<>();
+		oneOwner.add(Owner.builder().id(id).lastName("Gigex").build());
+		
+		when(ownerService.findAllByLastName(anyString())).thenReturn(oneOwner);
+		
+		mockMvc.perform(get("/owners"))
+	       .andExpect(status().is3xxRedirection())
+	       .andExpect(view().name(String.format("redirect:/owners/%d", id)))
+		   .andExpect(model().attributeExists("owner"));
+		
+	}
+	
+	@Test
+	public void testDisplayOwnersMany() throws Exception {
+		Set<Owner> twoOwners = new HashSet<>();
+		twoOwners.add(Owner.builder().id(1l).lastName("Gigex").build());
+		twoOwners.add(Owner.builder().id(2l).lastName("Vasilex").build());
+		
+		when(ownerService.findAllByLastName(anyString())).thenReturn(twoOwners);
+		
+		mockMvc.perform(get("/owners"))
+	       .andExpect(status().isOk())
+	       .andExpect(view().name("/owners/ownersList"))
+		   .andExpect(model().attributeExists("selections"));
+		
+	}
 }

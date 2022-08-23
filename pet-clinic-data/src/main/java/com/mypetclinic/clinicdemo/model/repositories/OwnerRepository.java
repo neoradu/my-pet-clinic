@@ -1,6 +1,7 @@
 package com.mypetclinic.clinicdemo.model.repositories;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,5 +17,7 @@ public interface OwnerRepository extends CrudRepository<Owner, Long> {
 	//One of the coolest features of Spring data JBA
 	//https://www.tutorialspoint.com/java8/java8_optional_class.htm
 	public Optional<Owner> findByLastName(String lastName);
-
+	
+	//Querry method.
+	public Optional<Set<Owner>> findAllByLastNameLike(String lastName);
 }

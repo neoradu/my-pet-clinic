@@ -13,7 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 @Entity
 @Table(name = "pets")
 public class Pet extends BaseEntity {
