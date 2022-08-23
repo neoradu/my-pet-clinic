@@ -132,4 +132,13 @@ public class MockMvcOwnersControllerTest {
 		   .andExpect(model().attributeExists("selections"));
 		
 	}
+	
+	@Test
+	public void testGetNew() throws Exception {
+		mockMvc.perform(get("/owners/new"))
+	       .andExpect(status().isOk())
+	       .andExpect(view().name("owners/createOrUpdateOwnerForm"))
+	       .andExpect(model().attributeExists("owner"));	
+	}
+	
 }
