@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mypetclinic.clinicdemo.model.Owner;
 import com.mypetclinic.clinicdemo.model.Pet;
 import com.mypetclinic.clinicdemo.model.PetType;
+import com.mypetclinic.clinicdemo.model.Visit;
 import com.mypetclinic.clinicdemo.services.OwnerService;
 import com.mypetclinic.clinicdemo.services.PetService;
 import com.mypetclinic.clinicdemo.services.PetTypeService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/owners/{ownerId}")
 public class PetController {
@@ -116,6 +112,36 @@ public class PetController {
 
 			petService.save(pet);
 			return "redirect:/owners/" + foundOwner.getId();
+		}
+	}
+	
+	@GetMapping("/pets/{petId}/visits/new")
+	public String getNewVisit(@PathVariable String petId, Model model) {
+		Pet pet = petService.findById(Long.valueOf(petId));
+		Visit newVisit = Visit.builder()
+				              .pet(pet)
+				              .build();
+		
+		model.addAttribute("pet", pet);
+		model.addAttribute("visit", newVisit);
+		return "/pets/createOrUpdateVisitForm";
+	}
+	
+	@PostMapping("/pets/{petId}/visits/new")
+	public String postNewVisit(@Validated Visit visit,
+						       @PathVariable String ownerId,
+						       @PathVariable String petId,
+			                   BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "owners/createOrUpdateVisitForm";
+		} else {			
+			Pet pet = petService.findById(Long.valueOf(petId));
+
+			visit.setPet(pet);
+			pet.getVisits().add(visit);
+
+			petService.save(pet);
+			return "redirect:/owners/" + ownerId;
 		}
 	}
 }
