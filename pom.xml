@@ -19,7 +19,10 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
+		<jaxb.version>2.3.0</jaxb.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 	
     <modules>
@@ -30,8 +33,21 @@
     <packaging>pom</packaging>
     
     <dependencies>
-
-
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<!--<version>${jaxb.version}</version>-->
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>		
     </dependencies>
 
     <build>
@@ -48,6 +64,20 @@
             		<autoVersionSubmodules>true</autoVersionSubmodules>
             	</configuration>
             </plugin>
+                    	<plugin>
+        	<!-- The Surefire Plugin is used during the test phase of the build lifecycle 
+        	     to execute the unit tests of an application.
+        	     https://maven.apache.org/surefire-archives/surefire-3.0.0-M2/maven-surefire-plugin/index.html -->
+        		<artifactId>maven-surefire-plugin</artifactId>
+        		<!-- <version>2.22.2</version> -->
+        		<dependencies>
+	        		<dependency>
+	        			<groupId>org.junit.platform</groupId>
+	        			<artifactId>junit-platform-surefire-provider</artifactId>
+	        			<version>1.3.2</version>
+	        		</dependency>
+        		</dependencies>
+        	</plugin>
         </plugins>
     </build>
 
