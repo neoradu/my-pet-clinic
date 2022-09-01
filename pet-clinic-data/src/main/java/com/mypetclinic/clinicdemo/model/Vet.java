@@ -23,22 +23,22 @@ public class Vet extends Person {
 	//Creates a Join table that will do the mapping(contains ids on the both side of the relation)
 	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name = "vet_id"),
 	inverseJoinColumns = @JoinColumn(name = "speciality_id"))
-	private Set<Speciality> specialities  = new HashSet<>();;
+	private Set<Speciality> specialties  = new HashSet<>();;
 
 	public Vet() {}
 	
 	@Builder //using Lombok to generate builder pattern https://projectlombok.org/features/Builder
 	public Vet(Long id, String firstName, String lastName, Set<Speciality> specialities) {
 		super(id, firstName, lastName);
-		this.specialities = (specialities != null) ? specialities : new HashSet<>();;
+		this.specialties = (specialities != null) ? specialities : new HashSet<>();;
 	}
 
 	public Set<Speciality> getSpecialities() {
-		return specialities;
+		return specialties;
 	}
 
 	public void setSpecialities(Set<Speciality> specialities) {
-		this.specialities = specialities;
+		this.specialties = specialities;
 	}
 	
 
