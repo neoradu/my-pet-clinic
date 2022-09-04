@@ -61,7 +61,7 @@ public class OwnersController {
 			return String.format("redirect:/owners/%d", foundOwner.getId());
 		} else {
 			model.addAttribute("selections", results);
-			return "/owners/ownersList";
+			return "owners/ownersList";
 		}
 			
 	}
