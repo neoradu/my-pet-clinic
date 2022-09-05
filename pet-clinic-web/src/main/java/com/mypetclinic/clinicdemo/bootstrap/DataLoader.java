@@ -19,6 +19,9 @@ import com.mypetclinic.clinicdemo.services.SpecialityService;
 import com.mypetclinic.clinicdemo.services.VetService;
 import com.mypetclinic.clinicdemo.services.VisitService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 	
@@ -54,17 +57,16 @@ public class DataLoader implements CommandLineRunner {
 		return sb.toString();	
 	}
 	private void loadData() {
-		System.out.println("Boostraping data...");
+		log.debug("DB empty! Boostraping data...");
 		PetType cat = PetType.builder()
-				             .name("Cat")
-				             .build();
-
+	             .name("Cat")
+	             .build();
 		PetType dog = PetType.builder()
-	                         .name("Dog")
-	                         .build();
+                .name("Dog")
+                .build();
+		
 		petTypeService.save(cat);
 		petTypeService.save(dog);
-		
 		
 		final String[] personNames = {"Vali", "Georgel", "Ionel", "Bogdan", "Radu", "Alex", "Vasile"};
 		final String[] specialityes = {"dentist", "taie lemne", "bate cuie"};
@@ -103,13 +105,12 @@ public class DataLoader implements CommandLineRunner {
 			visitService.save(visit);
 		}
 		//System.out.print(printAllData());
-		System.out.println("Boostraping data...END");	
+		log.debug("Boostraping data...END");	
 	}
 	@Override
 	public void run(String... args) throws Exception {
 		if(petTypeService.findAll().size() == 0)
-			loadData();
-				
+			loadData();			
 	}
 
 }

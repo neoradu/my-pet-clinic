@@ -11,7 +11,7 @@ import com.mypetclinic.clinicdemo.model.repositories.VisitRepository;
 import com.mypetclinic.clinicdemo.services.VisitService;
 
 @Service
-@Profile("springdatajpa")
+@Profile({"dev","prod","default"})
 public class VisitSDJpaService implements VisitService{
 	final private VisitRepository visitRepository;
 	

@@ -13,7 +13,7 @@ import com.mypetclinic.clinicdemo.services.PetService;
 import com.mypetclinic.clinicdemo.services.PetTypeService;
 
 @Service
-@Profile({"default", "map"})
+@Profile({"dev_map"})
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> 
                              implements OwnerService {
 	final private PetService petService;

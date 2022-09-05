@@ -7,7 +7,7 @@ import com.mypetclinic.clinicdemo.model.Pet;
 import com.mypetclinic.clinicdemo.services.PetService;
 
 @Service
-@Profile({"default", "map"})
+@Profile({"dev_map"})
 public class PetServiceMap extends AbstractMapService<Pet, Long> 
                            implements PetService {
 

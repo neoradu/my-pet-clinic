@@ -7,7 +7,7 @@ import com.mypetclinic.clinicdemo.model.Speciality;
 import com.mypetclinic.clinicdemo.services.SpecialityService;
 
 @Service
-@Profile({"default", "map"})
+@Profile({"dev_map"})
 public class SpecialityServiceMap  extends AbstractMapService<Speciality, Long> 
                                    implements SpecialityService {
 

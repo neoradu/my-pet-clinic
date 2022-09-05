@@ -12,7 +12,7 @@ import com.mypetclinic.clinicdemo.services.PetService;
 
 
 @Service
-@Profile("springdatajpa")
+@Profile({"dev","prod","default"})
 public class PetSDJpaService implements PetService{
 	final private PetRepository petRepository;
 	

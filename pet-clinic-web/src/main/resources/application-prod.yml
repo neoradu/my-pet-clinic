@@ -1,0 +1,12 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/pet_clinic_prod_db
+        username: pet_clinic_prod_user
+        password: pass #this should be passed by enviroment variable
+        platform: mysql #this seems to be important to be set
+    jpa:
+        hibernate:
+            ddl-auto: validate # tell hibernate to validate data base schema on startup
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: mysql
+        show-sql: false # in prod we do NOT whant to see the sql queries in the log
